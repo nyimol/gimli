@@ -56,6 +56,8 @@ size_t callRubyHook (struct GPRegs *regs, size_t index) {
             return (size_t)RSTRING_PTR (result);
             break;
         case T_FIXNUM:
+            return FIX2LONG (result);
+            break;
         case T_BIGNUM:
             return NUM2LONG (result);
             break;
@@ -86,7 +88,7 @@ off_t changeGOTEntry (char* symbol, off_t address) {
         memcpy (ptr, &address, sizeof(size_t));
     }
     delete elfParser;
-    while (linkMap->l_next) {
+    while (1) {
         if (strlen (linkMap->l_name) > 0 &&
             strstr (linkMap->l_name, "gimli.so") == NULL) {
             elfParser = new SmallELFParser;
@@ -107,6 +109,7 @@ off_t changeGOTEntry (char* symbol, off_t address) {
             }
             delete elfParser;
         }
+        if (!linkMap->l_next) { break; }
         linkMap = linkMap->l_next;
     }
     return orginalAddress;
