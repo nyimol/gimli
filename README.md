@@ -14,8 +14,9 @@ put hook.rb in ~/</p>
 end
 gimli = Gimli.new
 gimli.addHook "getpid", Hookgetpid.new</code></pre></p>
-<p>example :<br />
-<code>$LD_PRELOAD=./gimli.so ./example/getpid<br />
-pid is 1</code></p>
-<p><code>$LD_PRELOAD=./gimli.so ./example/strstr<br />
-... GIMLI ...</code></p>
+<p>example :
+<pre><code>$LD_PRELOAD=./gimli.so ./example/getpid
+pid is 1
+
+$LD_PRELOAD=./gimli.so ./example/strstr
+... GIMLI ...</code></pre></p>
